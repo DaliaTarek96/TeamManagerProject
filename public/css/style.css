@@ -1,0 +1,45 @@
+:root{
+    --color-primary: #26579b;
+    --color-secondary: #2c66b2;
+    --color-accent: #333;
+    --color-white : #fff;
+}
+html {
+  font-size: 62.5%;
+  line-height: 5rem;
+  font-family:Tahoma,'Segoe UI',  Geneva, Verdana, sans-serif;
+}
+h1{
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 8rem;
+}
+h1 span{
+    color: var(--color-primary);
+    text-transform: uppercase;
+}
+/* buttons  */
+.btn{
+    display: block;
+    text-decoration: none;
+    padding: .5rem 3rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: .5rem;
+    width: 50vw;
+    margin: 2rem auto;
+    text-align: center;
+    font-size: 2rem;
+}
+@media screen and (min-width: 992px) {
+    .btn{
+        width: 30vw;
+    }
+}
+.btn:hover{
+    background-color: var(--color-secondary);
+}
+/* home */
+.home{
+    padding-top: 15vh;
+}
