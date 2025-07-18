@@ -1,0 +1,28 @@
+<%- include('./../headerComponent/header.ejs') -%>
+<div class="register">
+<h1>
+        <span> smart tasks &amp; team manager</span></h1>
+        <form action="/register" method="post">
+            <input class="input" type="text" placeholder="Name" name="name">
+            <% const nError = errors.find(e=> e.path === 'name'); if(nError){ %>
+            <p class="error">Name is Required!</p>
+            <% } %>
+            <input class="input" type="text" placeholder="Email" name="email">
+            <% const eError = errors.find(e=> e.path==='email'); if (eError){ %>
+            <p class="error">Email is Required!</p>
+            <% } %>
+            <input class="input" type="password" placeholder="Password" name="password">
+            <% const pError = errors.find(e=> e.path ==='password'); if (pError){ %>
+            <p class="error"> <%= pError.msg %></p>
+             <% } %>
+            <input class="input" type="password" placeholder="Confirm Password" name="confirm_password">
+            <% if (!confirm) { %>
+            <p class="error">Don't match the password!</p>
+            <% } %>
+            <button class="btn" type="submit">Register</button>
+        </form>
+        <p class="msg">Already have an account&quest; <a  class='link' href="/">Login</a></p>
+</div>
+
+
+<%- include('./../footerComponent/footer.ejs') -%>

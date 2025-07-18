@@ -3,16 +3,21 @@
     --color-secondary: #2c66b2;
     --color-accent: #333;
     --color-white : #fff;
+    --color-border: #d1d5db;
+    --color-error : #Ab1b1b;
 }
 html {
   font-size: 62.5%;
   line-height: 5rem;
+  
   font-family:Tahoma,'Segoe UI',  Geneva, Verdana, sans-serif;
 }
 h1{
     text-align: center;
     font-size: 3rem;
+    margin: auto;
     margin-bottom: 8rem;
+    width: 80vw;
 }
 h1 span{
     color: var(--color-primary);
@@ -42,4 +47,61 @@ h1 span{
 /* home */
 .home{
     padding-top: 15vh;
+    
+}
+/* register */
+.register{
+    padding-top: 6vh;
+}
+.register .msg{
+    text-align: center;
+    font-size: 1.8rem;
+}
+.register h1{
+    margin-bottom: 4rem;
+}
+.register .btn{
+    margin-top: 4rem;
+    cursor:pointer;
+    border: none;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    width: 58vw;
+}
+.register .link{
+    text-decoration: none;
+    color: var(--color-primary);
+}
+.register .link:hover{
+    color: var(--color-secondary);
+}
+.register .input{
+    display: block;
+    padding: 1rem;
+    border: .1rem solid var(--color-border);
+    border-radius: .3rem;
+    margin: 2rem auto;
+    width: 55vw;
+    font-size: 1.5rem;
+}
+.register .input:focus{
+    outline: none;
+}
+.register .error{
+    width: 55vw;
+    color: var(--color-error);
+    font-size: 1.5rem;   
+    margin: -2rem auto;
+    font-weight:500;
+}
+@media screen and (min-width: 992px) {
+    .register .btn{
+        width: 35vw;
+    }
+    .register{
+    padding-top: 10vh;
+}
+    .register .input, .register .error{
+        width: 33vw;
+    }
 }
