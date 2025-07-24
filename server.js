@@ -1,12 +1,17 @@
 const express = require('express'),
       path = require('path'),
       body_parser = require('body-parser'),
+      mongoose = require('mongoose'),
       regRouter = require('./routes/registerRouter');
 
 
 // server
 const server = express();
 
+// mongo db
+mongoose.connect("mongodb://localhost:27017/taskmanager")
+.then(()=>{console.log('db connected...')})
+.catch((err)=>console.log(err));
 // setting
 server.set('view engine', 'ejs');
 server.set('views', path.join(__dirname,'views'));

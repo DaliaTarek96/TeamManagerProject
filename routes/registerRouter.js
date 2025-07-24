@@ -1,11 +1,19 @@
 const express = require('express'),
-      {body, validationResult} = require('express-validator');
+      {body, validationResult} = require('express-validator'),
+      mongoose= require('mongoose'),
+      path = require('path'),
+      Cryptr = require('cryptr')
+      cryptr= new Cryptr('myTotalySecretKey');
 
+
+// connect to db user schema
+require(path.join(__dirname,'..','model','userModel.js'));
+let users = mongoose.model('users');
 // Router
 const regRouter = express.Router();
 
 regRouter.get('/register',(req,res)=>{
-     res.render('registerComponent/register', {errors:[],confirm:false} );
+     res.render('registerComponent/register', {errors:[],confirm:true, userFound:false} );
 });
 regRouter.post('/register',[
     body('name').notEmpty().withMessage('Name is Required!'),
@@ -18,10 +26,11 @@ regRouter.post('/register',[
     let errors = validationResult(req);
     let equals = equal(req.body.password, req.body.confirm_password)
     if (! errors.isEmpty() || !equals ){
-        res.render('registerComponent/register',{errors: errors.array(), confirm:equals});
+        res.render('registerComponent/register',{errors: errors.array(), confirm:equals, userFound:false});
     }
     else{
-        res.render('home');
+        // save new user on DB ...
+        saveUser(req.body, res);
     }
 });
 
@@ -34,6 +43,32 @@ function equal(name , cname){
         return false;
 }
 
+// To save a new user  in DB
+function saveUser(data, res){
+    // check if email is found or not in db
+    let userFound = false;
+    users.find({Email:data.email}).then((da)=>{
+        if(!(da.length==0)){
+            userFound= true;
+            res.render('registerComponent/register',{errors:[],confirm:true,userFound: true});
+        }else{
+            const encryptedPasswordString = cryptr.encrypt(data.password);
+            // sign up new user 
+            let user = new users({
+                Name: data.name,
+                Email: data.email,
+                Password: encryptedPasswordString,
+                ConfirmPassword: data.confirm_password
+            });
+            user.save().then(()=>{
+                res.redirect('/')
+            }).catch(()=>{
+                ///////will add 404 page ///////
+                res.send("Sorry, page in maintanance..."); 
+            });
+        }
+    });
+}
 module.exports = regRouter;
 
 

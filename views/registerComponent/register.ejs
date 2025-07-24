@@ -19,6 +19,9 @@
             <% if (!confirm) { %>
             <p class="error">Don't match the password!</p>
             <% } %>
+            <% if (userFound) { %>
+            <p class="error">This email is already registered!</p>
+            <% } %>
             <button class="btn" type="submit">Register</button>
         </form>
         <p class="msg">Already have an account&quest; <a  class='link' href="/">Login</a></p>
