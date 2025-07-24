@@ -1,0 +1,20 @@
+<%- include('./../headerComponent/header.ejs') -%>
+<div class="form login-form">
+<h1><span> smart tasks &amp; team manager</span></h1>
+    <form action="/login" method="post">
+        <input class="input" type="text" placeholder="Email" name="email">
+        <input class= "input" type="password" placeholder="Password" name="password">
+        <% if (NotFound) { %>
+            <p class="error">There isn't account with this email!</p>
+        <% } %>
+        <% if (incorrect) { %>
+            <p class="error">Password is incorrect!</p>
+        <% } %>
+        <button class="btn" type="submit">Login</button>
+    </form>
+    <p class="msg">Forget Password&quest; <a  class='link' href="/">Click Here</a></p>
+    <hr>
+    <p class="msg">Don't have an account&quest; <a  class='link' href="/register">Sign Up</a></p>
+
+</div>
+<%- include('./../footerComponent/footer.ejs') -%>

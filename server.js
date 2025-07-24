@@ -2,7 +2,8 @@ const express = require('express'),
       path = require('path'),
       body_parser = require('body-parser'),
       mongoose = require('mongoose'),
-      regRouter = require('./routes/registerRouter');
+      regRouter = require('./routes/registerRouter'),
+      loginRouter = require('./routes/loginRouter');
 
 
 // server
@@ -25,7 +26,7 @@ server.use((req, res, next)=>{
 }); 
 // Routers
 server.use(regRouter);
-
+server.use(loginRouter)
 server.use('/',(req,res, next)=>{
     res.render('home');
 

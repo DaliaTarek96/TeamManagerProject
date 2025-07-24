@@ -1,5 +1,5 @@
 <%- include('./../headerComponent/header.ejs') -%>
-<div class="register">
+<div class="form">
 <h1>
         <span> smart tasks &amp; team manager</span></h1>
         <form action="/register" method="post">
@@ -20,11 +20,11 @@
             <p class="error">Don't match the password!</p>
             <% } %>
             <% if (userFound) { %>
-            <p class="error">This email is already registered!</p>
+            <p class="error">This email is already registers</p>
             <% } %>
             <button class="btn" type="submit">Register</button>
         </form>
-        <p class="msg">Already have an account&quest; <a  class='link' href="/">Login</a></p>
+        <p class="msg">Already have an account&quest; <a  class='link' href="/login">Login</a></p>
 </div>
 
 
