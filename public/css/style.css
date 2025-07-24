@@ -75,6 +75,7 @@ h1 span {
   color: var(--color-primary);
 }
 .form .link:hover {
+  cursor: pointer;
   color: var(--color-secondary);
   text-decoration: underline;
 }
@@ -115,4 +116,56 @@ h1 span {
   .login-form {
     padding-top: 20vh;
   }
+}
+
+/* Modal */
+.modal{
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .4 );
+}
+.modal form{
+  background-color: var(--color-white);
+  padding: 2rem;
+  width: 70vw;
+  border-radius: 1rem;
+  margin: 0 auto;
+  margin-top: 20vh;
+}
+.modal form h2{
+  font-size: 1.8rem;
+  text-align: center;
+}
+.modal form h2 span{
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+.modal .input{
+  width: 40vw;
+}
+.modal .btn{
+  padding: 1rem .5rem;
+  width: 30vw;
+}
+.modal .right{
+  display: flex;
+  justify-content:end;
+}
+.modal .exit{
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  margin: 0px;
+  padding: 1rem;
+  width: .8rem;
+  text-align: start;
+}
+
+.modal .exit span{
+  position: absolute;
+  top: 20.5vh;
+  text-align: center;
 }
