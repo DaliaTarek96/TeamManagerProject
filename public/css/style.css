@@ -305,5 +305,35 @@ text-align: center;
     width: 80%;
   }
 }
-
-
+.new-project{
+  padding-top: 2rem;
+}
+.new-project .input{
+  margin: 1rem auto;
+}
+.new-project .input{
+  color: #757575;
+}
+.new-project .select{
+  width: 58vw;
+}
+.new-project .Linput{
+  padding: 1rem;
+  border:none;
+  margin-left: 2rem;
+  font-size: 1.5rem;
+}
+.new-project .Linput:focus {
+  outline: none;
+}
+.new-project .label{
+  display: block;
+  color: var(--color-primary);
+  text-align: center;
+  font-size: 1.5rem;
+}
+@media screen and (min-width: 992px) {
+   .new-project .select {
+    width: 35vw;
+  }
+}

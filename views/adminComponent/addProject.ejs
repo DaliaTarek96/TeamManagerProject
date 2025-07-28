@@ -1,3 +1,44 @@
 <%- include('./../navbarComponent/nav.ejs') -%>
+<div class="form login-form new-project">
+    <h1><span> Add New Project</span></h1>
+    <form action="/new-project" method="post">
+        <input class="input" type="text" placeholder="Title" name="title" required>
+        <select class="input select" name="track" required>
+            <option hidden>---Choose Project Idea---</option>
+            <option value="Backend">Backend</option>
+            <option value="Frontend">Frontend</option>
+            <option value="MEAN Stack">MEAN Stack</option>
+            <option value="Full Stack">Full Stack</option>
+        </select>
+        <div class="input">
+            <label >Start From:</label>
+            <input  class="Linput" type="date" placeholder="From" name="Start" required>
+        </div>
+        <div class="input">
+            <label >End at:</label>
+            <input class="Linput" type="date" placeholder="To" name="end" required>
+        </div>
+        <label class="label">--- Choose Project Team ---</label>
+       <select class="input select" name="Members" multiple required>   
+            <% data.forEach((d)=>{ %>
+            <option value="<%= d.Email %>"><%= d.Name %></option>  
+            <% }); %>     
+        </select>
+        <label class="label">--- Choose Project Tasks ---</label>
+       <select class="input select" name="Tasks" multiple required>   
+            <option value="UI/UX">UI/UX</option>       
+            <option value="APIs">APIs</option>       
+            <option value="Routers">Routers</option>       
+            <option value="Models">Models</option>       
+            <option value="Frontend">Frontend</option>       
+            <option value="JS">JS</option>       
+            <option value="Bootstrap">Bootstrap</option>       
+            <option value="EJS">EJS</option>       
+        </select>
+        <button class="btn" type="submit">Add Project</button>
+    </form>
+    <hr>
+    <p class="msg"> <a  class='link' href="/admin">Back</a></p>
 
+</div>
 <%- include('./../footerComponent/footer.ejs') -%>
