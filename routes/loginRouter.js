@@ -22,10 +22,14 @@ loginRouter.post('/login',(req,res)=>{
         let incorrect = false;
         if(data.length != 0){
             let password = cryptr.decrypt(data[0].Password);
-            if (req.body.email.toLowerCase() === data[0].Email && password=== req.body.password){
+            if (req.body.email.toLowerCase() === data[0].Email && password=== req.body.password && data[0].role ==='admin'){
+                // to admin page    
+                res.redirect('/admin');
+            }else if (req.body.email.toLowerCase() === data[0].Email && password=== req.body.password && data[0].role ==='teamMember'){
                ///////will add user page ///////
                 res.redirect('/');
-            }else{
+            }
+            else{
             res.render('loginComponent/login', {NotFound:false,incorrect:true });
             }
         }else{

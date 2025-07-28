@@ -10,7 +10,7 @@ html {
   font-size: 62.5%;
   line-height: 5rem;
 
-  font-family: Tahoma, "Segoe UI", Geneva, Verdana, sans-serif;
+  font-family: sans-serif, Tahoma, "Segoe UI", Geneva, Verdana;
 }
 h1 {
   text-align: center;
@@ -131,7 +131,7 @@ h1 span {
 .modal form{
   background-color: var(--color-white);
   padding: 2rem;
-  width: 70vw;
+  width: 50vw;
   border-radius: 1rem;
   margin: 0 auto;
   margin-top: 20vh;
@@ -149,7 +149,12 @@ h1 span {
 }
 .modal .btn{
   padding: 1rem .5rem;
-  width: 30vw;
+  width: 10rem;
+  border: none;
+}
+.modal p{
+font-size: 1.6rem;
+text-align: center;
 }
 .modal .right{
   display: flex;
@@ -169,3 +174,136 @@ h1 span {
   top: 20.5vh;
   text-align: center;
 }
+@media  screen and (max-width:774px) {
+  .modal form{
+    width: 70vw;}
+}
+/* nav */
+.nav{
+  display: flex;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 1rem 5rem;
+  align-items: center;
+}
+.nav h2{
+  font-size: 2rem;
+  flex: auto;
+}
+.nav .nav-link{
+  text-align: end;
+  flex: auto;
+}
+.nav .nav-btn{
+   display: inline-block;
+   color: var(--color-white);
+   font-size: 1.5rem;
+   padding: 1rem 2rem;
+   background-color: var(--color-primary);
+  border: .1rem solid lightgray;
+
+}
+.nav .nav-btn:hover{
+  cursor: pointer;
+  background-color: var(--color-secondary);
+}
+@media screen and (max-width: 448px) {
+  .nav{
+    display: block;
+    text-align: center;
+  }
+}
+/* board */
+.board{
+  display: flex;
+  height: 82vh;
+  align-content: center;
+}
+.board .menu{
+  flex:  1 1 20%;
+  background-color: rgb(241, 241, 241);
+  padding: 1rem 5rem;
+
+}
+.board h2{
+  font-size: 1.8rem;
+  color: var(--color-primary);
+}
+.board h2:hover,.board .menu li:hover{
+  cursor: pointer;
+}
+.board .menu ul{
+  padding-left: 1rem;
+}
+.board .menu .link{
+  font-size: 1.6rem;
+  text-decoration: none;
+  color: black;
+}
+.board .menu .link:hover{
+  color: var(--color-accent);
+}
+.board .data{
+  flex: 1 1 100%;
+  
+}
+.board .data .teamMember-header,.board .data .teamMember-p{
+  line-height: 1rem;
+}
+.board .data .teamMember{
+  display: none;
+  border: 1px solid lightgray;
+  margin: 2rem;
+  padding: 1rem;
+  padding-bottom: 4rem;
+  border-radius:1rem ;
+  width: 60%;
+}
+.board .data .teamMember-btn{
+  width: 100px;
+  text-align: center;
+  border: none;
+  margin: 0;
+  float: right;
+}
+.board .data .btn,.board .data p{
+  font-size: 1.6rem;
+
+}
+
+.clear{
+  clear: both;
+}
+.board .data .projects{
+  display: none;
+}
+.board .data .project{
+  border: 1px solid lightgray;
+  margin: 2rem;
+  padding: 1rem;
+  padding-bottom: 4rem;
+  border-radius:1rem ;
+  width: 60%;
+}
+.board .data .projects .btn-second{
+  display: block;
+  width: 20rem;
+  float: none;
+  margin: 2rem;
+  padding: 1rem;
+  float: right;
+}
+@media screen and (max-width: 720px) {
+  .board .menu{
+  flex:  1 1 40%;
+  padding: 1rem 2rem;
+  }
+  .board .data .teamMember{
+    width: 80%;
+  }
+  .board .data .project{
+    width: 80%;
+  }
+}
+
+

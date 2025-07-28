@@ -3,7 +3,8 @@ const express = require('express'),
       body_parser = require('body-parser'),
       mongoose = require('mongoose'),
       regRouter = require('./routes/registerRouter'),
-      loginRouter = require('./routes/loginRouter');
+      loginRouter = require('./routes/loginRouter'),
+      adminRouter = require('./routes/adminRouter');
 
 
 // server
@@ -18,7 +19,7 @@ server.set('view engine', 'ejs');
 server.set('views', path.join(__dirname,'views'));
 server.use(express.static(path.join(__dirname,'public')));
 server.use(body_parser.urlencoded({extended:false}));
-
+server.use(body_parser.json());
 // middleware
 server.use((req, res, next)=>{
     console.log(req.url);
@@ -26,10 +27,10 @@ server.use((req, res, next)=>{
 }); 
 // Routers
 server.use(regRouter);
-server.use(loginRouter)
+server.use(loginRouter);
+server.use(adminRouter);
 server.use('/',(req,res, next)=>{
     res.render('home');
-
 });
 // port
 let port = process.env.port;
