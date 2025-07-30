@@ -10,14 +10,14 @@ let taskSchema = mongoose.model('task');
 // set router
 let adminRouter = express.Router();
 
-adminRouter.get('/admin',(req,res)=>{
-    userSchema.find({role:'teamMember'})
-    .then((data)=>{
-         res.render('adminComponent/admin',{data:data});
-    }).catch(()=>{
-        ///////will add 404 page ///////
+adminRouter.get('/admin',async (req,res)=>{
+    const data = await userSchema.find({role:'teamMember'});
+    const tasks = await taskSchema.find({}).populate({path:'Members'});
+    if(!data || !tasks){
         res.send("Sorry, page in maintanance...");
-    })
+    }else{
+        res.render('adminComponent/admin',{data:data, tasks:tasks});
+    }
    
 });
 
@@ -25,13 +25,23 @@ adminRouter.post('/admin/role',(req,res)=>{
     userSchema.updateOne({Email :req.body.Email },{$set:{
         role:'admin'
     }}).then((data)=>{
-        console.log(data)
         res.redirect('/admin');
     }).catch(()=>{
         ///////will add 404 page ///////
         res.send("Sorry, page in maintanance...");
     });
 });
+
+// to show all tasks
+adminRouter.get('/tasks/:id',(req,res)=>{
+    taskSchema.find({_id:req.params.id}).populate({path:'Members'}).then((data)=>{
+        res.render('adminComponent/showTasks',{data:data[0]});
+    }).catch(()=>{
+        ///////will add 404 page ///////
+        res.send("Sorry, page in maintanance...");
+    });
+});
+
 
 // to make new project
 adminRouter.get('/new-project',(req,res)=>{
@@ -64,6 +74,3 @@ adminRouter.post('/new-project',(req,res)=>{
     
 });
 module.exports =adminRouter;
-
-
-

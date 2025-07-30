@@ -20,9 +20,11 @@
       <a class="btn btn-second" href="/new-project">+ New Project</a>
       <div class="clear"></div>
       <div class="project">
-        <h2>project name</h2>
-        <p>description</p>
-        <button class="btn">More</button>
+        <% tasks.forEach((t)=>{ %>
+        <h2><%= t.Title %></h2>
+        <p><%= t.Track %></p>
+        <button class="btn"><a class="link" href="/tasks/<%=t._id %>">More</a></button>
+        <%  });%>
       </div>
     </div>
   </div>

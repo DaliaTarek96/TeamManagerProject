@@ -21,7 +21,7 @@
         <label class="label">--- Choose Project Team ---</label>
        <select class="input select" name="Members" multiple required>   
             <% data.forEach((d)=>{ %>
-            <option value="<%= d.Email %>"><%= d.Name %></option>  
+            <option value="<%= d._id %>"><%= d.Name %></option>  
             <% }); %>     
         </select>
         <label class="label">--- Choose Project Tasks ---</label>

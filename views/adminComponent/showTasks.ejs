@@ -1,0 +1,43 @@
+<%- include('./../navbarComponent/nav.ejs') -%>
+<div class="tasks">
+    <h2> Project Title : <%=data.Title%></h2>
+    <p>Track : <%=data.Track%></p>
+    <div class="members">
+        <h3>Members:</h3>
+        <ul>
+            <% data.Members.forEach ((d)=>{%>
+            <li><%=d.Name%></li>
+            <% }) %>
+        </ul>
+    </div>
+    <div class="time">
+        <div class="start">
+            <p><strong>Start From:</strong> <%= data.StartDate.toISOString().split('T')[0] %></p> 
+        </div>
+        <div class="end">
+            <p><strong>End At:</strong> <%= data.EndDate.toISOString().split('T')[0] %></p>
+        </div>
+    </div>
+    <div class="task-process">
+        <div class="todo">
+            <h3>To Do</h3>
+            <ul>
+            <% data.Tasks.forEach ((d)=>{%>
+            <li><%=d%></li>
+            <% }) %>
+        </ul>
+        </div>
+        <div class="inprogress">
+            <h3>In Progress </h3>
+            
+        </div>
+        <div class="done">
+            <h3>Done</h3>
+        </div>
+        <hr>
+    </div>
+     
+    <p class="msg"> <a  class='btn link' href="/admin" >Back</a></p>
+
+</div>
+<%- include('./../footerComponent/footer.ejs') -%>
