@@ -4,7 +4,8 @@ const express = require('express'),
       mongoose = require('mongoose'),
       regRouter = require('./routes/registerRouter'),
       loginRouter = require('./routes/loginRouter'),
-      adminRouter = require('./routes/adminRouter');
+      adminRouter = require('./routes/adminRouter'),
+      errorRouter = require('./routes/errorRouter');
 
 
 // server
@@ -26,12 +27,16 @@ server.use((req, res, next)=>{
     next();
 }); 
 // Routers
+server.get('/',(req,res, next)=>{
+    res.render('home');
+});
 server.use(regRouter);
 server.use(loginRouter);
 server.use(adminRouter);
-server.use('/',(req,res, next)=>{
-    res.render('home');
-});
+server.use(errorRouter);
+server.use((req,res)=>{
+    res.status(404).redirect("/error");
+})
 // port
 let port = process.env.port;
 server.listen(port|| 8080 ,()=>{
