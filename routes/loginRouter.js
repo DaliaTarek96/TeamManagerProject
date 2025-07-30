@@ -18,8 +18,6 @@ loginRouter.get('/login',(req,res)=>{
 
 loginRouter.post('/login',(req,res)=>{
     userSchema.find({Email:req.body.email}).then((data)=>{
-        let NotFound =false;
-        let incorrect = false;
         if(data.length != 0){
             let password = cryptr.decrypt(data[0].Password);
             if (req.body.email.toLowerCase() === data[0].Email && password=== req.body.password && data[0].role ==='admin'){
@@ -36,8 +34,7 @@ loginRouter.post('/login',(req,res)=>{
             res.render('loginComponent/login', {NotFound:true,incorrect:false });
         }
     }).catch(()=>{
-        ///////will add 404 page ///////
-        res.send("Sorry, page in maintanance...");
+        res.status(404).redirect("/error");
     });
 });
 

@@ -19,7 +19,7 @@ regRouter.post('/register',[
     body('name').notEmpty().withMessage('Name is Required!'),
     body('email').isEmail().withMessage('Email must be valid!'),
     body('password').notEmpty().withMessage('Password is Required!')
-    .isLength({min :8}).withMessage('Password must be at least 6 character')
+    .isLength({min :8}).withMessage('Password must be at least 8 character')
     .matches(/[A-Z]/).withMessage('Password must conatain at least 1 uppercase')
     .matches(/[^a-zA-Z0-9]/).withMessage('Password must conatain at least 1 special character'),
 ], (req,res)=>{
@@ -64,8 +64,7 @@ function saveUser(data, res){
                 ///////will add user page ///////
                 res.redirect('/')
             }).catch(()=>{
-                ///////will add 404 page ///////
-                res.send("Sorry, page in maintanance..."); 
+                res.status(404).redirect("/error");
             });
         }
     });

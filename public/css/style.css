@@ -430,3 +430,32 @@ text-align: center;
   width: 45vw;
   margin: 0 auto;}
 }
+
+.error h1{
+  text-align: center;
+  font-weight: bolder;
+  color: #0f2748;
+  font-size: 17rem;
+  margin-top: 17rem;
+}
+.error p{
+  text-align: center;
+  color: var(--color-accent);
+  font-size: 3rem;
+}
+.error button {
+  display: block;
+  margin: 2rem auto;
+  padding: 1.5rem 2.5rem;
+  font-size: 2rem;
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: 1rem;
+}
+.error button:hover{
+  background-color: var(--color-secondary);
+}
+.error a{
+  color: var(--color-white);
+  text-decoration: none;
+}

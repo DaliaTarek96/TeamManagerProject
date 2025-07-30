@@ -14,7 +14,7 @@ adminRouter.get('/admin',async (req,res)=>{
     const data = await userSchema.find({role:'teamMember'});
     const tasks = await taskSchema.find({}).populate({path:'Members'});
     if(!data || !tasks){
-        res.send("Sorry, page in maintanance...");
+       res.status(404).redirect("/error");
     }else{
         res.render('adminComponent/admin',{data:data, tasks:tasks});
     }
@@ -27,8 +27,7 @@ adminRouter.post('/admin/role',(req,res)=>{
     }}).then((data)=>{
         res.redirect('/admin');
     }).catch(()=>{
-        ///////will add 404 page ///////
-        res.send("Sorry, page in maintanance...");
+        res.status(404).redirect("/error");
     });
 });
 
@@ -37,8 +36,7 @@ adminRouter.get('/tasks/:id',(req,res)=>{
     taskSchema.find({_id:req.params.id}).populate({path:'Members'}).then((data)=>{
         res.render('adminComponent/showTasks',{data:data[0]});
     }).catch(()=>{
-        ///////will add 404 page ///////
-        res.send("Sorry, page in maintanance...");
+        res.status(404).redirect("/error");
     });
 });
 
@@ -50,8 +48,7 @@ adminRouter.get('/new-project',(req,res)=>{
         res.render('adminComponent/addProject',{data:data});
     })
     .catch(()=>{
-        ///////will add 404 page ///////
-        res.send("Sorry, page in maintanance...");
+       res.status(404).redirect("/error");
     });
     
 });
@@ -68,8 +65,7 @@ adminRouter.post('/new-project',(req,res)=>{
     .then(()=>{
         res.redirect('/admin');
     }).catch(()=>{
-        ///////will add 404 page ///////
-        res.send("Sorry, page in maintanance...");
+        res.status(404).redirect("/error");
     });
     
 });
