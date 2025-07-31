@@ -61,8 +61,7 @@ function saveUser(data, res){
                 ConfirmPassword: data.confirm_password
             });
             user.save().then(()=>{
-                ///////will add user page ///////
-                res.redirect('/')
+                res.redirect('/user');
             }).catch(()=>{
                 res.status(404).redirect("/error");
             });

@@ -24,8 +24,7 @@ loginRouter.post('/login',(req,res)=>{
                 // to admin page    
                 res.redirect('/admin');
             }else if (req.body.email.toLowerCase() === data[0].Email && password=== req.body.password && data[0].role ==='teamMember'){
-               ///////will add user page ///////
-                res.redirect('/');
+                res.redirect('/user');
             }
             else{
             res.render('loginComponent/login', {NotFound:false,incorrect:true });

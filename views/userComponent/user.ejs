@@ -1,0 +1,40 @@
+<%- include('./../headerComponent/header.ejs') -%>
+<div class="nav">
+    <h2 class="header">Smart Tasks &amp; Team Manager</h2>
+    <div class='nav-link'><button class='nav-btn' ><a class="link" href="/">Logout</a></button></div>
+</div>
+<div class="menu">
+<hr> 
+    <ul class="menu-list">
+        <li class="menu--item"><a class="menu--link" >Profile   </a></li>
+        <li class="menu--item"><a class="menu--link" >New Tasks </a></li>
+        <li class="menu--item"><a class="menu--link" >Task to do</a></li>
+        <li class="menu--item"><a class="menu--link" >End Tasks </a></li>
+    </ul>
+</div>
+<div class="form profile">
+    <h1><span> smart tasks &amp; team manager</span></h1>
+        <form action="/user" method="post">
+            <input class="input" type="text" placeholder="Name" name="name" readonly>
+            
+            <input class="input" type="text" placeholder="Email" name="email" readonly>
+            
+            <input class="input" type="password" placeholder="Password" name="password">
+            
+            <input class="input" type="password" placeholder="Confirm Password" name="confirm_password">
+           
+            
+            <button class="btn" type="submit">Register</button>
+        </form>
+</div>
+<div class="newTask">
+<h1>newTask</h1>
+</div>
+<div class="toDo">
+    <h1>todo</h1>
+</div>
+<div class="tasksDone">
+    <h1>tasksDone</h1>
+</div>
+<script src="/JS/user.js"></script>
+<%- include('./../footerComponent/footer.ejs') -%>

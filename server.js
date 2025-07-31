@@ -5,7 +5,8 @@ const express = require('express'),
       regRouter = require('./routes/registerRouter'),
       loginRouter = require('./routes/loginRouter'),
       adminRouter = require('./routes/adminRouter'),
-      errorRouter = require('./routes/errorRouter');
+      errorRouter = require('./routes/errorRouter'),
+      userRouter = require('./routes/userRouter');
 
 
 // server
@@ -33,6 +34,7 @@ server.get('/',(req,res, next)=>{
 server.use(regRouter);
 server.use(loginRouter);
 server.use(adminRouter);
+server.use(userRouter);
 server.use(errorRouter);
 server.use((req,res)=>{
     res.status(404).redirect("/error");

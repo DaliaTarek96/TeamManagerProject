@@ -459,3 +459,32 @@ text-align: center;
   color: var(--color-white);
   text-decoration: none;
 }
+/* user page */
+ .header:hover{
+  cursor: pointer;
+}
+.menu hr{
+  margin: 0;
+  border: .2px solid var(--color-border);
+}
+.menu .menu-list{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  justify-content:space-around;
+  margin: 0;
+  padding-left: 0;
+  background-color: var(--color-primary);
+}
+.menu .menu--item{
+  list-style-type: none;
+  text-align: center;
+}
+.menu .menu--item .menu--link{
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: var(--color-white);
+  cursor: pointer;
+}
+.profile, .newTask,.toDo,.tasksDone{
+  display: none;
+}
