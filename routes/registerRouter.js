@@ -3,7 +3,8 @@ const express = require('express'),
       mongoose= require('mongoose'),
       path = require('path'),
       Cryptr = require('cryptr')
-      cryptr= new Cryptr('myTotalySecretKey');
+      cryptr= new Cryptr('myTotalySecretKey'),
+      jwt = require('jsonwebtoken');
 
 
 // connect to db user schema
@@ -61,7 +62,9 @@ function saveUser(data, res){
                 ConfirmPassword: data.confirm_password
             });
             user.save().then(()=>{
-                res.redirect('/user');
+                const token = user.generateAuthToken();
+                res.cookie('token', token, {httpOnly:true})
+                res.redirect('/'+data.name+'');
             }).catch(()=>{
                 res.status(404).redirect("/error");
             });

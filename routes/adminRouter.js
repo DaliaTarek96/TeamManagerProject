@@ -1,6 +1,8 @@
 const express= require('express'),
     mongoose = require ('mongoose'),
-    path = require('path');
+    path = require('path'),
+    auth = require('./../middlewares/auth'),
+    admin = require('./../middlewares/admin');
 
 // set DB
 require('./../model/userModel');
@@ -10,7 +12,7 @@ let taskSchema = mongoose.model('task');
 // set router
 let adminRouter = express.Router();
 
-adminRouter.get('/admin',async (req,res)=>{
+adminRouter.get('/admin',[auth,admin],async (req,res)=>{
     const data = await userSchema.find({role:'teamMember'});
     const tasks = await taskSchema.find({}).populate({path:'Members'});
     if(!data || !tasks){
@@ -32,7 +34,7 @@ adminRouter.post('/admin/role',(req,res)=>{
 });
 
 // to show all tasks
-adminRouter.get('/tasks/:id',(req,res)=>{
+adminRouter.get('/tasks/:id',[auth,admin],(req,res)=>{
     taskSchema.find({_id:req.params.id}).populate({path:'Members'}).then((data)=>{
         res.render('adminComponent/showTasks',{data:data[0]});
     }).catch(()=>{
@@ -42,7 +44,7 @@ adminRouter.get('/tasks/:id',(req,res)=>{
 
 
 // to make new project
-adminRouter.get('/new-project',(req,res)=>{
+adminRouter.get('/new-project',[auth,admin],(req,res)=>{
     userSchema.find({role:'teamMember'})
     .then((data)=>{
         res.render('adminComponent/addProject',{data:data});

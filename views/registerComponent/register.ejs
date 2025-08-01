@@ -16,8 +16,8 @@
             <p class="error"> <%= pError.msg %></p>
              <% } %>
             <input class="input" type="password" placeholder="Confirm Password" name="confirm_password">
-            <% if (!confirm) { %>
-            <p class="error">Don't match the password!</p>
+            <% if (equals) { %>
+            <p class="error">password & Confirm Password must be the same</p>
             <% } %>
             <% if (userFound) { %>
             <p class="error">This email is already registers</p>

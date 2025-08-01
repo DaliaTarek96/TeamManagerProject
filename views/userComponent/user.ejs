@@ -1,7 +1,7 @@
 <%- include('./../headerComponent/header.ejs') -%>
 <div class="nav">
     <h2 class="header">Smart Tasks &amp; Team Manager</h2>
-    <div class='nav-link'><button class='nav-btn' ><a class="link" href="/">Logout</a></button></div>
+    <div class='nav-link'><button class='nav-btn' ><a class="link" href="/logout">Logout</a></button></div>
 </div>
 <div class="menu">
 <hr> 
@@ -14,17 +14,33 @@
 </div>
 <div class="form profile">
     <h1><span> smart tasks &amp; team manager</span></h1>
-        <form action="/user" method="post">
-            <input class="input" type="text" placeholder="Name" name="name" readonly>
+        <form action="/<%= user.Name %>" method="post">
+            <input class="input name" type="text" value="<%= user.Name %>" name="name" readonly>
             
-            <input class="input" type="text" placeholder="Email" name="email" readonly>
+            <input class="input" type="text" value="<%= user.Email %>" name="email" readonly>
             
-            <input class="input" type="password" placeholder="Password" name="password">
-            
-            <input class="input" type="password" placeholder="Confirm Password" name="confirm_password">
-           
-            
-            <button class="btn" type="submit">Register</button>
+            <input class="input password" type="password" placeholder="Old Password" name="oldpassword"  >
+             <% const pError3 = errors.find(e=> e.path ==='oldpassword'); if (pError3){ %>
+            <p class="error"> <%= pError3.msg %></p>
+             <% } %>
+             <% if (old && !pError3) { %>
+            <p class="error">Old password is incorrect!</p>
+            <% } %>
+            <input class="input password" type="password" placeholder="New Password" name="newpassword" >
+              <% const pError1 = errors.find(e=> e.path ==='newpassword'); if (pError1){ %>
+            <p class="error"> <%= pError1.msg %></p>
+             <% } %>
+            <input class="input password" type="password" placeholder="Re-enter New Password" name="confirm_password" >
+           <% const pError2 = errors.find(e=> e.path ==='confirm_password'); if (pError2){ %>
+            <p class="error"> <%= pError2.msg %></p>
+             <% } %>
+             <% if (!equals && !pError2 && !pError3 && !old  ) { %>
+            <p class="error">Don't match the password!</p>
+            <% } %>
+             
+            <a class="btn edit link" >Edit</a>
+            <button class="btn save " type="submit">Save</button>
+            <a class="btn returnback link" href="/<%= user.Name %>">Return</a>
         </form>
 </div>
 <div class="newTask">
@@ -36,5 +52,15 @@
 <div class="tasksDone">
     <h1>tasksDone</h1>
 </div>
+<script>
+    let errors, equals;
+    window.onload=function(){
+         errors = '<%=errors%>';
+         equals ='<%=equals%>';
+         olds = '<%=old%>'
+         setData(errors, equals, olds)
+    }
+        
+</script>
 <script src="/JS/user.js"></script>
 <%- include('./../footerComponent/footer.ejs') -%>

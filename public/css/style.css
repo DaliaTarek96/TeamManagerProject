@@ -488,3 +488,21 @@ text-align: center;
 .profile, .newTask,.toDo,.tasksDone{
   display: none;
 }
+.profile .password, .profile .save, .profile .returnback{
+  display: none;
+}
+.profile .link{
+width: 50vw;
+color: var(--color-white);
+padding-top: 0;
+padding-bottom: 0;
+}
+.profile .link:hover{
+color: var(--color-white);
+text-decoration: none;
+}
+@media screen and (min-width: 992px) {
+  .profile .link {
+    width: 30vw;
+  }
+}
