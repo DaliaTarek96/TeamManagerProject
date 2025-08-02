@@ -45,9 +45,9 @@ server.get('/logout',(req,res)=>{
 });
 server.use(regRouter);
 server.use(loginRouter);
+server.use(errorRouter);
 server.use(adminRouter);
 server.use(userRouter);
-server.use(errorRouter);
 
 server.use((req,res)=>{
     res.status(404).redirect("/error");

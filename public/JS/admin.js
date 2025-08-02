@@ -1,21 +1,33 @@
 let team = document.getElementsByClassName("team")[0];
-let teamMember = document.getElementsByClassName("teamMember")[0];
+let teamMember = document.getElementsByClassName("teamMember");
 let Dashboard = document.getElementsByClassName("Dashboard")[0];
 let details = document.getElementsByClassName("details")[0];
-let project = document.getElementsByClassName("projects")[0];
+let project = document.getElementsByClassName("projects");
 
 // menu
 Dashboard.onclick = function () {
-  teamMember.style.display = "none";
-  project.style.display = "none";
+  for (let i =0; i< teamMember.length; i++){
+    teamMember[i].style.display = "none";
+  }
+  for (let i =0; i< teamMember.length; i++){
+    project[i].style.display = "none";
+  }
 };
 team.onclick = function () {
-  teamMember.style.display = "block";
-  project.style.display = "none";
+  for (let i =0; i< teamMember.length; i++){
+    teamMember[i].style.display = "block";
+  }
+   for (let i =0; i< teamMember.length; i++){
+    project[i].style.display = "none";
+  }
 };
 details.onclick = function () {
-  teamMember.style.display = "none";
-  project.style.display = "block";
+  for (let i =0; i< teamMember.length; i++){
+    teamMember[i].style.display = "none";
+  }
+   for (let i =0; i< teamMember.length; i++){
+    project[i].style.display = "block";
+  }
 };
 
 // change user to admin

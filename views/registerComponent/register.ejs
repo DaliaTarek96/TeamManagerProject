@@ -16,7 +16,7 @@
             <p class="error"> <%= pError.msg %></p>
              <% } %>
             <input class="input" type="password" placeholder="Confirm Password" name="confirm_password">
-            <% if (equals) { %>
+            <% if (!confirm )  { %>
             <p class="error">password & Confirm Password must be the same</p>
             <% } %>
             <% if (userFound) { %>

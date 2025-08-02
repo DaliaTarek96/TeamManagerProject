@@ -14,7 +14,7 @@
 </div>
 <div class="form profile">
     <h1><span> smart tasks &amp; team manager</span></h1>
-        <form action="/<%= user.Name %>" method="post">
+        <form action="/<%=user.Name%>" method="post">
             <input class="input name" type="text" value="<%= user.Name %>" name="name" readonly>
             
             <input class="input" type="text" value="<%= user.Email %>" name="email" readonly>
@@ -39,18 +39,148 @@
             <% } %>
              
             <a class="btn edit link" >Edit</a>
-            <button class="btn save " type="submit">Save</button>
+            <button class="btn save " type="submit" value="edit">Save</button>
             <a class="btn returnback link" href="/<%= user.Name %>">Return</a>
         </form>
 </div>
 <div class="newTask">
-<h1>newTask</h1>
+    <% let matches ='';
+    tasks.forEach((t)=>{ 
+        
+         t.Members.forEach(m=>{
+            
+        if ( m.MemberName._id.toString()==user._id)
+          matches= m.status;
+         })
+        if (matches == 'new'){ %>
+<div class="tasks">
+    <h2> Project Title : <%=t.Title%></h2>
+    <p>Track : <%=t.Track%></p>
+    <div class="members">
+        <h3>Members:</h3>
+        <ul>
+            <% t.Members.forEach ((d)=>{%>
+            <li><%=d.MemberName.Name%></li>
+            <% }) %>
+        </ul>
+    </div>
+    <div class="time">
+        <div class="start">
+            <p><strong>Start From:</strong> <%= t.StartDate.toISOString().split('T')[0] %></p> 
+        </div>
+        <div class="end">
+            <p><strong>End At:</strong> <%= t.EndDate.toISOString().split('T')[0] %></p>
+        </div>
+    </div>
+    <div class="task-process ">
+        <div class="todo">
+            <h3>---You must select which tasks u will do---</h3>
+            <form action="/chooseTask"  method="post">
+            <% t.Tasks.forEach ((d)=>{%>
+            <span class="input-check">
+                <input type="text" value="<%=user._id%>" name="uID" hidden>
+                <input type="text" value="<%=t._id%>" name="tID" hidden>
+                <% if (d.status) {%>
+                <input  id="chooseTa" type="checkbox" name="chooseTa"  value="<%=d.TaskName%>" checked disabled>
+                <label for="chooseTa"><%=d.TaskName%></label>
+                <%  } if (!d.status) { %>
+                <input  id="chooseTa" type="checkbox" name="chooseTa"  value="<%=d.TaskName%>" >
+                <label for="chooseTa"><%=d.TaskName%></label>
+                <%}%>
+                
+            </span>
+            
+            <% }) %>
+
+            <button class="btn" type="submit" value="save">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <hr class="line" >
+    
+
+</div>
+<% } %>
+<% }) %>
+    <p class="msg"> <a  class='btn link' href="/<%= user.Name %>" >Back</a></p>
+
 </div>
 <div class="toDo">
-    <h1>todo</h1>
+    <% let matche ='';
+    tasks.forEach((t)=>{ 
+        
+         t.Members.forEach(m=>{
+        if ( m.MemberName._id.toString()==user._id)
+          matche= m.status;
+         })
+        if (matche == 'todo'){ %>
+    <div class="tasks">
+    <h2> Project Title : <%=t.Title%></h2>
+    <p>Track : <%=t.Track%></p>
+    <div class="time">
+        <div class="start">
+            <p><strong>Start From:</strong> <%= t.StartDate.toISOString().split('T')[0] %></p> 
+        </div>
+        <div class="end">
+            <p><strong>End At:</strong> <%= t.EndDate.toISOString().split('T')[0] %></p>
+        </div>
+    </div>
+    <div class="task-process ">
+        <div class="todo">
+            <h3>---You must select which tasks u will do---</h3>
+            <form action="/finish"  method="post">
+            <% t.Tasks.forEach ((d)=>{%>
+            <span class="input-check">
+                <input type="text" value="<%=user._id%>" name="uID" hidden>
+                <input type="text" value="<%=t._id%>" name="tID" hidden>
+                <% if (d.status && d.Developer ==  user.Name) {%>
+                <input  id="chooseTa" type="checkbox" name="chooseTa"  value="<%=d.TaskName%>" checked disabled>
+                <label for="chooseTa"><%=d.TaskName%></label>
+                <%  }  %>     
+            </span>
+            <% }) %>
+            <button class="btn" type="submit" value="save">Finish</button>
+            </form>
+        </div>
+    </div>
+    </div>
+    <hr class="line">
+<% }}) %>
 </div>
 <div class="tasksDone">
-    <h1>tasksDone</h1>
+    <h1>Finished Projects</h1>
+    <table>
+        <thead>
+            <th>Project Title</th>
+            <th>Track</th>
+            <th>Start Time</th>
+            <th>Deadline</th>
+            <th>End Time </th>
+            <th>Done in avilable Time</th>
+        </thead>
+        <% let match ='';
+    tasks.forEach((t)=>{ 
+        
+         t.Members.forEach(m=>{
+        if ( m.MemberName._id.toString()==user._id)
+          match= m.status;
+         })
+        if (match == 'done'){ %>
+            <tr>
+                <td><%=t.Title%></td>
+                <td><%=t.Track%></td>
+                <td><%= t.StartDate.toISOString().split('T')[0] %></td>
+                <td><%= t.EndDate.toISOString().split('T')[0] %></td>
+                <td><%= t.FinishTime.toISOString().split('T')[0] %></td>
+                <% if (t.EndDate.toISOString().split('T')[0] >t.FinishTime.toISOString().split('T')[0] ){%>
+                <td style="color: rgb(8, 89, 8);"> Yes </td>
+                <% } else { %>
+                <td style="color: rgb(127, 7, 7);"> NO </td>
+                 <% }  %>
+            </tr>
+         <% }}) %>
+    </table>
 </div>
 <script>
     let errors, equals;
@@ -58,6 +188,10 @@
          errors = '<%=errors%>';
          equals ='<%=equals%>';
          olds = '<%=old%>'
+         flag ='<%=flag%>'
+         if (flag == true){
+            confirm("All data saved");
+         }
          setData(errors, equals, olds)
     }
         

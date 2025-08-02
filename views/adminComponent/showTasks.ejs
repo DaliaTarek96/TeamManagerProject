@@ -6,7 +6,7 @@
         <h3>Members:</h3>
         <ul>
             <% data.Members.forEach ((d)=>{%>
-            <li><%=d.Name%></li>
+            <li><%=d.MemberName.Name%></li>
             <% }) %>
         </ul>
     </div>
@@ -22,17 +22,21 @@
         <div class="todo">
             <h3>To Do</h3>
             <ul>
-            <% data.Tasks.forEach ((d)=>{%>
-            <li><%=d%></li>
-            <% }) %>
+            <% data.Tasks.forEach ((d)=>{
+                if (!d.status) {%>
+
+            <li><%=d.TaskName%></li>
+            <%} }) %>
         </ul>
         </div>
         <div class="inprogress">
             <h3>In Progress </h3>
-            
-        </div>
-        <div class="done">
-            <h3>Done</h3>
+            <ul>
+            <% data.Tasks.forEach ((d)=>{
+                if (d.status) {%>
+
+            <li><%=d.TaskName%> by <%=d.Developer%> </li>
+            <%} }) %>
         </div>
         <hr>
     </div>

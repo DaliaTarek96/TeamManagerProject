@@ -18,6 +18,7 @@ adminRouter.get('/admin',[auth,admin],async (req,res)=>{
     if(!data || !tasks){
        res.status(404).redirect("/error");
     }else{
+
         res.render('adminComponent/admin',{data:data, tasks:tasks});
     }
    
@@ -35,7 +36,7 @@ adminRouter.post('/admin/role',(req,res)=>{
 
 // to show all tasks
 adminRouter.get('/tasks/:id',[auth,admin],(req,res)=>{
-    taskSchema.find({_id:req.params.id}).populate({path:'Members'}).then((data)=>{
+    taskSchema.find({_id:req.params.id}).populate({path:'Members'}).populate('Members.MemberName').then((data)=>{
         res.render('adminComponent/showTasks',{data:data[0]});
     }).catch(()=>{
         res.status(404).redirect("/error");
@@ -55,13 +56,23 @@ adminRouter.get('/new-project',[auth,admin],(req,res)=>{
     
 });
 adminRouter.post('/new-project',(req,res)=>{
+    let tas=[];
+    for (let i =0; i< req.body.Tasks.length; i++){
+        tas[i] = {TaskName: req.body.Tasks[i]};
+    }
+    let allMembers =[];
+    for (let i=0 ; i<req.body.Members.length ; i++){
+        allMembers[i]= {
+            MemberName:req.body.Members[i]
+        }
+    }
     let newTask = new taskSchema({
         Title: req.body.title,
         Track: req.body.track,
         StartDate: req.body.Start,
         EndDate: req.body.end,
-        Members :req.body.Members,
-        Tasks: req.body.Tasks
+        Members :allMembers,
+        Tasks:tas
     });
     newTask.save()
     .then(()=>{

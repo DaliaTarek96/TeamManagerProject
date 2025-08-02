@@ -25,7 +25,7 @@ regRouter.post('/register',[
     .matches(/[^a-zA-Z0-9]/).withMessage('Password must conatain at least 1 special character'),
 ], (req,res)=>{
     let errors = validationResult(req);
-    let equals = equal(req.body.password, req.body.confirm_password)
+    let equals = equal(req.body.password, req.body.confirm_password) 
     if (! errors.isEmpty() || !equals ){
         res.render('registerComponent/register',{errors: errors.array(), confirm:equals, userFound:false});
     }
