@@ -78,6 +78,8 @@ node server.js
 
 Feel free to fork the repo and submit pull requests. Open issues if you find bugs or want to suggest improvements.
 
+--- 
+
 💬 Contact
 	•	GitHub: DaliaTarek96
 	•	Email: daliatakl0@gmail.com
